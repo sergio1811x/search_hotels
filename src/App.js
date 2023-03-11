@@ -30,8 +30,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path={'/'} element={<MainPage />} />
-        <Route path="/" element={<MainPage />} />
+         <Route path="/" element={<MainPage />} />
         <Route path="/hotels" element={authenticate(<HotelsPage />)} />
       </Routes>
     </div>
