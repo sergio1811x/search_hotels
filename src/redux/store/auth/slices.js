@@ -23,8 +23,8 @@ export const authSlice = createSlice({
       const password = state.users.map((el) => el.password);
 
       if (
-        email.includes(action.payload.valueLogin) === true &&
-        password.includes(action.payload.valuePassword) === true
+        email.includes(action.payload.login) === true &&
+        password.includes(action.payload.password) === true
       ) {
         state.isAuth = true;
         localStorage.setItem('Auth', JSON.stringify(state.isAuth));

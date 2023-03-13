@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { validateEmail, validatePassword } from './helpers/Validate';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,15 +6,17 @@ import { authSelector } from '../redux/store/auth/selector';
 import { authorization } from '../redux/store/auth/slices';
 
 export const MainPage = () => {
-  const [valueLogin, setValueLogin] = useState('');
-  const [valuePassword, setValuePassword] = useState('');
+  const valueLogin = useRef('');
+  const valuePassword = useRef('');
   const [onFocusInput, setOnFocusInput] = useState();
   const [authError, setAuthError] = useState(false);
   const { isAuth } = useSelector(authSelector);
   const dispatch = useDispatch();
 
   const handlerLoginButton = () => {
-    dispatch(authorization({ valueLogin, valuePassword })); /*емейл и пасс в глобльный стейт*/
+    const login = valueLogin.current.value;
+    const password = valuePassword.current.value;
+    dispatch(authorization({ login, password })); /*емейл и пасс в глобльный стейт*/
     if (!isAuth) {
       setAuthError(true); /*выведет ошибку если авторизация не удалась*/
     }
@@ -38,12 +40,14 @@ export const MainPage = () => {
               <span>Логин</span>
               <TextField
                 id={'input1'}
+                inputRef={valueLogin}
                 className={'main_window-items-inputs-block-input'}
                 placeholder={'Введите email'}
-                value={valueLogin}
-                onChange={(e) => setValueLogin(e.target.value)}
-                error={validateEmail(onFocusInput, valueLogin) === false}
-                label={validateEmail(onFocusInput, valueLogin) === false && 'Формат test@mail.com'}
+                error={validateEmail(onFocusInput, valueLogin.current.value) === false}
+                label={
+                  validateEmail(onFocusInput, valueLogin.current.value) === false &&
+                  'Формат test@mail.com'
+                }
                 inputProps={{
                   style: inputStyle,
                 }}
@@ -59,12 +63,11 @@ export const MainPage = () => {
                 className={'main_window-items-inputs-block-input'}
                 type="text"
                 placeholder={'Введите пароль'}
-                value={valuePassword}
-                onChange={(e) => setValuePassword(e.target.value)}
+                inputRef={valuePassword}
                 onClick={(e) => setOnFocusInput(e.target.value)}
-                error={validatePassword(onFocusInput, valuePassword) === false}
+                error={validatePassword(onFocusInput, valuePassword.current.value) === false}
                 label={
-                  validatePassword(onFocusInput, valuePassword) === false &&
+                  validatePassword(onFocusInput, valuePassword.current.value) === false &&
                   'Формат более 8 символов, без кириллицы'
                 }
                 inputProps={{

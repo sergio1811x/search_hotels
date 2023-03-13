@@ -7,7 +7,7 @@ import {
   getFilterRating,
 } from '../../redux/store/hotels/slices';
 
-export const Favorites = () => {
+export const Favorites = React.memo(() => {
   const dispatch = useDispatch();
   const { favorite } = useSelector(hotelsSelector);
   const [filterRating, setFilterRating] = useState(null);
@@ -123,4 +123,4 @@ export const Favorites = () => {
       </div>
     </div>
   );
-};
+});

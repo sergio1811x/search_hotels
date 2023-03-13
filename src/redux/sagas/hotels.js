@@ -7,7 +7,7 @@ function* getHotelsSaga(action) {
   try {
     const response = yield call(
       axios.get,
-      `http://engine.hotellook.com/api/v2/cache.json?location=${action.city}&checkIn=${action.dateIn}&checkOut=${action.dateOut}&limit=15&currency=rub`,
+      `https://engine.hotellook.com/api/v2/cache.json?location=${action.city}&checkIn=${action.dateIn}&checkOut=${action.dateOut}&limit=8&currency=rub`,
     );
     yield put(getFetchHotelsData(response.data));
   } catch (err) {

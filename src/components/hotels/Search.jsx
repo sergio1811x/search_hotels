@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -7,7 +7,7 @@ import { GET_HOTELS, GET_IMAGES } from '../../redux/sagas/types';
 import { getSearchValue } from '../../redux/store/search/slices';
 import { TodayDate } from '../helpers/TodayDate';
 
-export const Search = () => {
+export const Search = React.memo(() => {
   const dispatch = useDispatch();
   const { today } = TodayDate(); /*сегодняшняя дата*/
   const [totalDays, setTotalDays] = useState(1);
@@ -97,4 +97,4 @@ export const Search = () => {
       </div>
     </div>
   );
-};
+});
