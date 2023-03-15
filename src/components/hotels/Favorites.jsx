@@ -37,15 +37,11 @@ export const Favorites = React.memo(() => {
   };
 
   return (
-    <div className={'hotels-body_right_favorite'}>
-      <span className={'hotels-body_right_favorite_title'}>Избранное</span>
-      <div className={'hotels-body_right_favorite_filters'}>
+    <div className={'favorite'}>
+      <span className={'title'}>Избранное</span>
+      <div className={'filters'}>
         <div
-          className={
-            filterRating === null
-              ? 'hotels-body_right_favorite_filters_rate'
-              : 'hotels-body_right_favorite_filters_rate hotels-body_right_favorite_filters_rate_active'
-          }
+          className={filterRating === null ? 'filters_rate' : 'filters_rate filters_rate_active'}
           onClick={() => handlerFilterRating()}
         >
           <span>Рейтинг</span>
@@ -58,11 +54,7 @@ export const Favorites = React.memo(() => {
           />
         </div>
         <div
-          className={
-            filterPrice === null
-              ? 'hotels-body_right_favorite_filters_price'
-              : 'hotels-body_right_favorite_filters_price hotels-body_right_favorite_filters_price_active'
-          }
+          className={filterPrice === null ? 'filters_price' : 'filters_price filters_price_active'}
           onClick={() => handlerFilterPrice()}
         >
           <span>Цена</span>
@@ -75,18 +67,18 @@ export const Favorites = React.memo(() => {
           />
         </div>
       </div>
-      <div className={'hotels-body_right_favorite_block'}>
+      <div className={'block'}>
         {favorite?.map((hotel) => {
           return (
-            <div className={'hotels-body_right_favorite_block_hotel'} key={hotel.hotelId}>
-              <span className={'hotels-body_right_favorite_block_hotel_title'}>
+            <div className={'hotel'} key={hotel.hotelId}>
+              <span className={'hotel_title'}>
                 {hotel.hotelName}
                 <img
                   src={require('../../assets/images/like.png')}
                   onClick={() => handlerDeleteFavorite(hotel)}
                 />
               </span>
-              <div className={'hotels-body_right_favorite_block_hotel_dates'}>
+              <div className={'hotel_dates'}>
                 <span>{hotel.date}</span>
                 <span>-</span>
                 <span>
@@ -95,18 +87,16 @@ export const Favorites = React.memo(() => {
                     (hotel.days > 4 && hotel.days + ' дней')}
                 </span>
               </div>
-              <div className={'hotels-body_right_favorite_block_hotel_price'}>
+              <div className={'hotel_price'}>
                 <div>
                   <img
-                    className={'hotels-body_right_favorite_block_hotel_price_stars'}
+                    className={'hotel_price_stars'}
                     src={require(`../../assets/images/stars${hotel.stars}.png`)}
                   />
                 </div>
                 <div>
-                  <span className={'hotels-body_right_favorite_block_hotel_price_text'}>
-                    Price:
-                  </span>
-                  <span className={'hotels-body_right_favorite_block_hotel_price_count'}>
+                  <span className={'hotel_price_text'}>Price:</span>
+                  <span className={'hotel_price_count'}>
                     {`${hotel.priceAvg.toFixed(0)}`
                       .split('')
                       .reverse()
@@ -116,7 +106,7 @@ export const Favorites = React.memo(() => {
                   </span>
                 </div>
               </div>
-              <div className={'hotels-body_right_favorite_block_hotel_line'}></div>
+              <div className={'hotel_line'}></div>
             </div>
           );
         })}

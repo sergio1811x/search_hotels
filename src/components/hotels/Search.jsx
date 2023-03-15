@@ -34,20 +34,20 @@ export const Search = React.memo(() => {
   const inputStyle = { height: '50px', paddingTop: 0, paddingBottom: 0, fontWeight: 300 };
 
   return (
-    <div className={'hotels-body_right_search'}>
-      <div className={'hotels-body_right_search_inputs'}>
-        <div className={'hotels-body_right_search_inputs_items'}>
+    <div className={'search'}>
+      <div className={'search_inputs'}>
+        <div className={'search_inputs_items'}>
           Локация
           <TextField
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className={'hotels-body_right_search_inputs_items_location'}
+            className={'search_inputs_items_location'}
             inputProps={{
               style: inputStyle,
             }}
           />
         </div>
-        <div className={'hotels-body_right_search_inputs_items'}>
+        <div className={'search_inputs_items'}>
           Дата заселения
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {/*// Дата пикер дефолтный Material Ui*/}
@@ -68,7 +68,7 @@ export const Search = React.memo(() => {
                 <TextField
                   {...params}
                   value={dateIn}
-                  className={'hotels-body_right_search_inputs_items_date'}
+                  className={'search_inputs_items_date'}
                   inputProps={{
                     style: inputStyle,
                   }}
@@ -77,21 +77,18 @@ export const Search = React.memo(() => {
             />
           </LocalizationProvider>
         </div>
-        <div className={'hotels-body_right_search_inputs_items'}>
+        <div className={'search_inputs_items'}>
           Количество дней
           <TextField
             value={totalDays}
             onChange={(e) => setTotalDays(e.target.value)}
-            className={'hotels-body_right_search_inputs_items_days'}
+            className={'search_inputs_items_days'}
             inputProps={{
               style: inputStyle,
             }}
           />
         </div>
-        <div
-          className={'hotels-body_right_search_inputs_button'}
-          onClick={() => handlerSearchButton()}
-        >
+        <div className={'search_inputs_button'} onClick={() => handlerSearchButton()}>
           Найти
         </div>
       </div>

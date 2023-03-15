@@ -21,13 +21,13 @@ export const HotelsPage = () => {
 
   const imagesData = images.flat(Infinity).map((el) => el);
 
-  const handlerLogout = () => {
+  const handleLogout = () => {
     /*выход из аккаунта*/
     dispatch(logout(false));
     navigate('/');
   };
 
-  const handlerFavoriteHotel = (hotel, totalDays, formatData) => {
+  const handleFavoriteHotel = (hotel, totalDays, formatData) => {
     const datesObj = { days: totalDays, date: formatData };
     const favoritesDate = Object.assign(datesObj, hotel);
     dispatch(getFavoriteHotel(favoritesDate));
@@ -35,30 +35,30 @@ export const HotelsPage = () => {
 
   return (
     <div className={'hotels'}>
-      <div className={'hotels-top'}>
-        <span className={'hotels-top_title'}>Simple Hotel Check</span>
-        <div className={'hotels-top_exit'} onClick={() => handlerLogout()}>
-          <span className={'hotels-top_exit_text'}>Выйти</span>
+      <div className={'top'}>
+        <span className={'title'}>Simple Hotel Check</span>
+        <div className={'exit'} onClick={() => handleLogout()}>
+          <span className={'exit_text'}>Выйти</span>
           <img src={require('../assets/images/exit.png')} />
         </div>
       </div>
-      <div className={'hotels-body'}>
-        <div className={'hotels-body_right'}>
+      <div className={'body'}>
+        <div className={'right'}>
           <Search /> {/*Поиск*/}
           <Favorites /> {/*Избранное*/}
         </div>
-        <div className={'hotels-body_left'}>
-          <div className={'hotels-body_left_title'}>
-            <div className={'hotels-body_left_title_text'}>
+        <div className={'left'}>
+          <div className={'title'}>
+            <div className={'title_text'}>
               <span>Отели</span>
               <span>
                 <img src={require('../assets/images/arrow.png')} />
               </span>
               <span> {city}</span>
             </div>
-            <span className={'hotels-body_left_title_date'}>{formatData}</span>
+            <span className={'title_date'}>{formatData}</span>
           </div>
-          <div className={'hotels-body_left_carousel'}>
+          <div className={'carousel'}>
             <Carousel>
               {imagesData?.map((item, index) => {
                 {
@@ -67,29 +67,29 @@ export const HotelsPage = () => {
               })}
             </Carousel>
           </div>
-          <div className={'hotels-body_left_main'}>
-            <div className={'hotels-body_left_main_title'}>
+          <div className={'main'}>
+            <div className={'main_title'}>
               Добавлено в Избранное:
               <span>{favorite.length > 0 ? favorite.length : '-'}</span>
               {(favorite.length == 1 && ' отель') ||
                 (favorite.length > 1 && favorite.length < 5 && ' отеля') ||
                 (favorite.length > 4 && ' отелей')}
             </div>
-            <div className={'hotels-body_left_main_info'}>
+            <div className={'main_info'}>
               {data?.map((hotel) => {
                 return (
-                  <div className={'hotels-body_left_main_info_hotel'} key={hotel.hotelId}>
-                    <div className={'hotels-body_left_main_info_hotel_image'}>
+                  <div className={'hotel'} key={hotel.hotelId}>
+                    <div className={'hotel_image'}>
                       <img src={require('../assets/images/house.png')} />
                     </div>
-                    <span className={'hotels-body_left_main_info_hotel_title'}>
+                    <span className={'hotel_title'}>
                       {hotel.hotelName}
                       <img
                         src={require(`../assets/images/like2.png`)}
-                        onClick={() => handlerFavoriteHotel(hotel, totalDays, formatData)}
+                        onClick={() => handleFavoriteHotel(hotel, totalDays, formatData)}
                       />
                     </span>
-                    <div className={'hotels-body_left_main_info_hotel_dates'}>
+                    <div className={'hotel_dates'}>
                       <span>{formatData}</span>
                       <span>-</span>
                       <span>
@@ -98,18 +98,16 @@ export const HotelsPage = () => {
                           (totalDays > 4 && totalDays + ' дней')}
                       </span>
                     </div>
-                    <div className={'hotels-body_left_main_info_hotel_price'}>
+                    <div className={'hotel_price'}>
                       <div>
                         <img
-                          className={'hotels-body_left_main_info_hotel_price_stars'}
+                          className={'hotel_price_stars'}
                           src={require(`../assets/images/stars${hotel.stars}.png`)}
                         />
                       </div>
                       <div>
-                        <span className={'hotels-body_left_main_info_hotel_price_text'}>
-                          Price:
-                        </span>
-                        <span className={'hotels-body_left_main_info_hotel_price_count'}>
+                        <span className={'hotel_price_text'}>Price:</span>
+                        <span className={'hotel_price_count'}>
                           {`${hotel.priceAvg.toFixed(0)}`
                             .split('')
                             .reverse()
@@ -119,7 +117,7 @@ export const HotelsPage = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={'hotels-body_left_main_info_hotel_line'}></div>
+                    <div className={'hotel_line'}></div>
                   </div>
                 );
               })}
