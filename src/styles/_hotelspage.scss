@@ -46,8 +46,10 @@
   padding: 32px;
   background: #fff;
   margin-bottom: 24px;
+  background: #fff;
+}
 
-  &_inputs {
+  .inputs {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -101,7 +103,7 @@
       }
     }
   }
-}
+
 
 .favorite {
   display: flex;

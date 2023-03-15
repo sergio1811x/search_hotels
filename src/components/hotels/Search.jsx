@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -35,19 +35,19 @@ export const Search = React.memo(() => {
 
   return (
     <div className={'search'}>
-      <div className={'search_inputs'}>
-        <div className={'search_inputs_items'}>
+      <div className={'inputs'}>
+        <div className={'inputs_items'}>
           Локация
           <TextField
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className={'search_inputs_items_location'}
+            className={'inputs_items_location'}
             inputProps={{
               style: inputStyle,
             }}
           />
         </div>
-        <div className={'search_inputs_items'}>
+        <div className={'inputs_items'}>
           Дата заселения
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {/*// Дата пикер дефолтный Material Ui*/}
@@ -68,7 +68,7 @@ export const Search = React.memo(() => {
                 <TextField
                   {...params}
                   value={dateIn}
-                  className={'search_inputs_items_date'}
+                  className={'inputs_items_date'}
                   inputProps={{
                     style: inputStyle,
                   }}
@@ -77,18 +77,18 @@ export const Search = React.memo(() => {
             />
           </LocalizationProvider>
         </div>
-        <div className={'search_inputs_items'}>
+        <div className={'inputs_items'}>
           Количество дней
           <TextField
             value={totalDays}
             onChange={(e) => setTotalDays(e.target.value)}
-            className={'search_inputs_items_days'}
+            className={'inputs_items_days'}
             inputProps={{
               style: inputStyle,
             }}
           />
         </div>
-        <div className={'search_inputs_button'} onClick={() => handlerSearchButton()}>
+        <div className={'inputs_button'} onClick={() => handlerSearchButton()}>
           Найти
         </div>
       </div>
