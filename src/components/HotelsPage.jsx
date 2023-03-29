@@ -22,7 +22,6 @@ export const HotelsPage = () => {
   const imagesData = images.flat(Infinity).map((el) => el);
 
   const handleLogout = () => {
-    /*выход из аккаунта*/
     dispatch(logout(false));
     navigate('/');
   };
@@ -35,30 +34,30 @@ export const HotelsPage = () => {
 
   return (
     <div className={'hotels'}>
-      <div className={'top'}>
-        <span className={'title'}>Simple Hotel Check</span>
-        <div className={'exit'} onClick={() => handleLogout()}>
-          <span className={'exit_text'}>Выйти</span>
+      <div className={'hotels__top'}>
+        <span className={'hotels__top_title'}>Simple Hotel Check</span>
+        <div className={'hotels__top_exit'} onClick={() => handleLogout()}>
+          <span className={'hotels__top_exit-text'}>Выйти</span>
           <img src={require('../assets/images/exit.png')} />
         </div>
       </div>
-      <div className={'body'}>
-        <div className={'right'}>
+      <div className={'hotels__body'}>
+        <div className={'hotels__body_right'}>
           <Search /> {/*Поиск*/}
           <Favorites /> {/*Избранное*/}
         </div>
-        <div className={'left'}>
-          <div className={'title'}>
-            <div className={'title_text'}>
+        <div className={'hotels__body_left'}>
+          <div className={'hotels__body_title'}>
+            <div className={'hotels__body_title-text'}>
               <span>Отели</span>
               <span>
                 <img src={require('../assets/images/arrow.png')} />
               </span>
               <span> {city}</span>
             </div>
-            <span className={'title_date'}>{formatData}</span>
+            <span className={'hotels__body_title-date'}>{formatData}</span>
           </div>
-          <div className={'carousel'}>
+          <div className={'hotels__carousel'}>
             <Carousel>
               {imagesData?.map((item, index) => {
                 {
@@ -67,29 +66,29 @@ export const HotelsPage = () => {
               })}
             </Carousel>
           </div>
-          <div className={'main'}>
-            <div className={'main_title'}>
+          <div className={'hotels__main'}>
+            <div className={'hotels__main_title'}>
               Добавлено в Избранное:
               <span>{favorite.length > 0 ? favorite.length : '-'}</span>
               {(favorite.length == 1 && ' отель') ||
                 (favorite.length > 1 && favorite.length < 5 && ' отеля') ||
                 (favorite.length > 4 && ' отелей')}
             </div>
-            <div className={'main_info'}>
+            <div className={'hotels__main_info'}>
               {data?.map((hotel) => {
                 return (
-                  <div className={'hotel'} key={hotel.hotelId}>
-                    <div className={'hotel_image'}>
+                  <div className={'hotels__main_hotel'} key={hotel.hotelId}>
+                    <div className={'hotels__main_image'}>
                       <img src={require('../assets/images/house.png')} />
                     </div>
-                    <span className={'hotel_title'}>
+                    <span className={'hotels__main_title'}>
                       {hotel.hotelName}
                       <img
                         src={require(`../assets/images/like2.png`)}
                         onClick={() => handleFavoriteHotel(hotel, totalDays, formatData)}
                       />
                     </span>
-                    <div className={'hotel_dates'}>
+                    <div className={'hotels__main_dates'}>
                       <span>{formatData}</span>
                       <span>-</span>
                       <span>
@@ -98,16 +97,16 @@ export const HotelsPage = () => {
                           (totalDays > 4 && totalDays + ' дней')}
                       </span>
                     </div>
-                    <div className={'hotel_price'}>
+                    <div className={'hotels__main_price'}>
                       <div>
                         <img
-                          className={'hotel_price_stars'}
+                          className={'hotels__main_price-stars'}
                           src={require(`../assets/images/stars${hotel.stars}.png`)}
                         />
                       </div>
                       <div>
-                        <span className={'hotel_price_text'}>Price:</span>
-                        <span className={'hotel_price_count'}>
+                        <span className={'hotels__main_price-text'}>Price:</span>
+                        <span className={'hotels__main_price-count'}>
                           {`${hotel.priceAvg.toFixed(0)}`
                             .split('')
                             .reverse()
@@ -117,7 +116,7 @@ export const HotelsPage = () => {
                         </span>
                       </div>
                     </div>
-                    <div className={'hotel_line'}></div>
+                    <div className={'hotels__main_line'}></div>
                   </div>
                 );
               })}

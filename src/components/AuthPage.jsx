@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../redux/store/auth/selector';
 import { authorization } from '../redux/store/auth/slices';
 
-export const MainPage = () => {
+export const AuthPage = () => {
   const valueLogin = useRef('');
   const valuePassword = useRef('');
   const [onFocusInput, setOnFocusInput] = useState();
@@ -16,32 +16,32 @@ export const MainPage = () => {
   const handleLoginButton = () => {
     const login = valueLogin.current.value;
     const password = valuePassword.current.value;
-    dispatch(authorization({ login, password })); /*емейл и пасс в глобльный стейт*/
+    dispatch(authorization({ login, password }));
     if (!isAuth) {
-      setAuthError(true); /*выведет ошибку если авторизация не удалась*/
+      setAuthError(true);
     }
   };
 
   const inputStyle = { height: '50px', paddingTop: 0, paddingBottom: 0 };
 
   return (
-    <div className={'main_page'} onClick={(e) => setOnFocusInput(e.target.id)}>
-      <div className={'background_image'} />
+    <div className={'auth'} onClick={(e) => setOnFocusInput(e.target.id)}>
+      <div className={'auth__background_image'} />
       <div className={'window'}>
         {authError && (
           <div style={{ position: 'absolute', marginLeft: 95, marginTop: 355, color: 'red' }}>
             Неверный логин или пароль!
           </div>
         )}
-        <div className={'items'}>
-          <span className={'title'}>Simple Hotel Check</span>
+        <div className={'window__items'}>
+          <span className={'window__items_title'}>Simple Hotel Check</span>
           <div className={'inputs'}>
-            <div className={'inputs-block'}>
+            <div className={'window__items_inputs-block'}>
               <span>Логин</span>
               <TextField
                 id={'input1'}
                 inputRef={valueLogin}
-                className={'inputs-block-input'}
+                className={'window__items_inputs-block-input'}
                 placeholder={'Введите email'}
                 error={validateEmail(onFocusInput, valueLogin.current.value) === false}
                 label={
@@ -56,11 +56,11 @@ export const MainPage = () => {
                 }}
               />
             </div>
-            <div className={'inputs-block'}>
+            <div className={'window__items_inputs-block'}>
               <span>Пароль</span>
               <TextField
                 id={'input2'}
-                className={'inputs-block-input'}
+                className={'window__items_inputs-block-input'}
                 type="text"
                 placeholder={'Введите пароль'}
                 inputRef={valuePassword}
@@ -76,11 +76,9 @@ export const MainPage = () => {
               />
             </div>
           </div>
-          {/*<Link to="/hotels" style={{ textDecoration: 'none' }}>*/}
           <div className={'button'} onClick={() => handleLoginButton()}>
             Войти
           </div>
-          {/*</Link>*/}
         </div>
       </div>
     </div>
